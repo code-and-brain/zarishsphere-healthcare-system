@@ -1,0 +1,23 @@
+name: ZarishCare Service CI
+
+on:
+  push:
+    paths:
+      - services/zarish-care-service/**
+      - .github/workflows/zarish-care-ci.yml
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22
+      - name: Build
+        run: cd services/zarish-care-service && go build ./cmd/main.go
+      - name: Run tests
+        run: echo "No tests yet"
+      - name: Build Docker image
+        run: cd services/zarish-care-service && docker build -t zarish-care-service .
