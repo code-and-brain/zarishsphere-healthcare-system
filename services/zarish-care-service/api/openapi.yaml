@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: ZarishCare Patient API
+  version: 1.0.0
+paths:
+  /patients:
+    get:
+      summary: List all patients
+      responses:
+        '200':
+          description: List of patients
+    post:
+      summary: Create a new patient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        '201':
+          description: Patient created
+  /patients/{id}:
+    get:
+      summary: Get a patient by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Patient details
+    put:
+      summary: Update a patient by ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        '200':
+          description: Patient updated
+    delete:
+      summary: Delete a patient by ID
+      responses:
+        '204':
+          description: Patient deleted
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        dob:
+          type: string
+        gender:
+          type: string
+        contact:
+          type: string
+        medicalHistory:
+          type: array
+          items:
+            type: string
