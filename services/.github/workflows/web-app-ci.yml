@@ -1,0 +1,24 @@
+name: Web App CI
+
+on:
+  push:
+    paths:
+      - apps/web-app/**
+      - packages/**
+      - .github/workflows/web-app-ci.yml
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: yarn --cwd apps/web-app install
+      - name: Build
+        run: yarn --cwd apps/web-app build
+      - name: Test
+        run: yarn --cwd apps/web-app test
